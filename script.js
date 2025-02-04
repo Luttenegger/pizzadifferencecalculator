@@ -88,6 +88,8 @@ const calculatePercentageDifference = (() => {
 
     if (totalPizzaDiff < 100) {
         generatePizzas(totalPizzaDiff);
+    } else {
+        output.innerHTML = '';
     }
   });
 
