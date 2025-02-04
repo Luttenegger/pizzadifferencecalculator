@@ -3,12 +3,16 @@ const DELAYSPEED = 50;
 const output = document.getElementById('output');
 const pizzaOutput = document.getElementById('pizzaOutput');
 const submit = document.getElementById('submit');
+const resetDiv = document.getElementById('resetDiv');
 const reset = document.getElementById('reset');
 const pizzaOne = document.getElementById('pizza1');
 let errorMessage;
 let totalPizzaDiff = 0;
 let delay = 0;
 
+//
+// Listeners
+//
 window.addEventListener('keyup', function (e) {
     if (e.key === 'Enter') {
         checkAndSubmit();
@@ -25,6 +29,13 @@ submit.addEventListener('click', function () {
     checkAndSubmit();
 });
 
+reset.addEventListener('click', function () {
+    resetAll();
+});
+
+//
+// Returns
+//
 const isValid = () => {
     const pizzaOne = Number(document.getElementById('pizza1').value) || null;
     const pizzaTwo = Number(document.getElementById('pizza2').value) || null;
@@ -59,6 +70,9 @@ const largerPizza = () => {
     return pizzaOne > pizzaTwo ? pizzaOne : pizzaTwo || null;
 }
 
+//
+// Functions
+//
 function calculatePercentageDifference() {
     const smallSize = smallerPizza();
     const largeSize = largerPizza();
@@ -80,6 +94,8 @@ function checkAndSubmit() {
     if (isValid()) {
         calculatePercentageDifference();
     }
+
+    resetDiv.classList.remove('hide');
 }
 
 function createPizzaDiv() {
@@ -115,6 +131,18 @@ function createLastPizzaDiv(lastPizzaDegrees) {
             <div class="pizza" style="${lastPizzaStyle} animation-delay: ${delay}ms"></div>
         `;
     }
+}
+
+function resetAll() {
+    const pizza1 = document.getElementById('pizza1');
+    output.innerHTML = '';
+    pizzaOutput.innerHTML = '';
+    pizza1.value = '';
+    document.getElementById('pizza2').value = '';
+    resetDiv.classList.add('hide');
+    delay = 0;
+    pizza1.focus();
+    pizza1.select();
 }
 
 async function generatePizzas() {
