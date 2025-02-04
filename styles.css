@@ -1,5 +1,6 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
+    background-color: beige;
 }
 
 input {
@@ -8,6 +9,10 @@ input {
     border: 1px solid gray;
     height: 10px;
     padding: 10px;
+}
+
+.title {
+    text-align: center;
 }
 
 .button {
@@ -23,6 +28,18 @@ input {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
+}
+
+.button.danger {
+    background-color: #ba0000;
+}
+
+.button.danger:hover {
+    background-color: #980202;
+}
+
+.button {
+    width: 270px;
 }
 
 .button:hover {
@@ -61,11 +78,14 @@ input {
 #pizzaOutput {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .pizza {
     width: 100px;
     height: 100px;
+    max-width: 100px;
+    max-height: 100px;
     margin: 5px;
     border-radius: 100%;
     background-image: url("pizza.png");
@@ -83,4 +103,12 @@ input {
     100% {
     opacity: 1;
     }
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
 }
