@@ -11,6 +11,10 @@ input {
     padding: 10px;
 }
 
+.title {
+    text-align: center;
+}
+
 .button {
     background-color: #04AA6D; /* Green */
     border: none;
