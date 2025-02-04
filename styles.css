@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input {
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    height: 10px;
+    padding: 10px;
+}
+
+.button {
+    background-color: #04AA6D; /* Green */
+    border: none;
+    color: white;
+    background-color: #008CBA;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #017095;
+}
+
+.button.invalid {
+    background-color: rgb(220, 220, 220);
+    color: rgb(118, 117, 117);
+}
+
+.button.invalid:hover {
+    cursor: not-allowed;
+}
+
+.small, .large, .total, .percent {
+    font-size: 1.4rem;
+}
+
+.small {
+    color: orange;
+}
+
+.large {
+    color: green;
+}
+
+.total {
+    color: red;
+}
+
+.percent {
+    color: blue;
+}
+
+#pizzaOutput {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pizza {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    border-radius: 100%;
+    background-image: url("pizza.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    animation: fadeIn ease 1000ms forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+    opacity: 0;
+    }
+
+    100% {
+    opacity: 1;
+    }
+}

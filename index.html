@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Calc</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<style>
+    .wrapper {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 5rem;
+    }
+
+    .wrapper div {
+        padding: 1rem;
+    }
+</style>
+<div class="wrapper">
+    <div class="title">
+        <h1>The Pizza Calculator</h1>
+    </div>
+    <div>
+        <input type="text" id="pizza1" name="pizza one" placeholder="Pizza One Size (in inches)">
+    </div>
+    <div>
+        <input type="text" id="pizza2" name="pizza two" placeholder="Pizza Two Size (in inches)">
+    </div>
+    <div>
+        <button id="submit" class="button invalid">Calculate Pizza Difference</button>
+    </div>
+    <div id="output">
+    </div>
+    <div id="pizzaOutput">
+    </div>
+</div>
+</body>
+</html>
+
+<script src="script.js"></script>
