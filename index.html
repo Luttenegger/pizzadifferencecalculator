@@ -7,29 +7,31 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<style>
-    .wrapper {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-        padding-top: 5rem;
-    }
-
-    .wrapper div {
-        padding: 1rem;
-    }
-</style>
 <div class="wrapper">
     <div class="title">
-        <h1>The Pizza Calculator</h1>
+        <h1>Pizza Difference Calculator</h1>
     </div>
-    <div>
-        <input type="number" id="pizza1" pattern="[0-9]*" name="pizza one" placeholder="Pizza One Size (in inches)">
+    <div class="input-wrap">
+        <div class="inputs">
+            <input class="num-imput input-pizza" type="number" id="pizza1" pattern="[0-9]*" name="pizza one" placeholder="Pizza One Size (in inches)">
+            <input class="num-imput input-price" type="number" id="pizza1Price" pattern="[0-9]*" name="pizza one" placeholder="Price">
+        </div>
+        <div class="inputs">
+            <input class="num-imput input-pizza"  type="number" id="pizza2" pattern="[0-9]*" name="pizza two" placeholder="Pizza Two Size (in inches)">
+            <input class="num-imput input-price"  type="number" id="pizza2Price" pattern="[0-9]*" name="pizza two" placeholder="Price">
+        </div>
     </div>
-    <div>
-        <input type="number" id="pizza2" pattern="[0-9]*" name="pizza two" placeholder="Pizza Two Size (in inches)">
+    <div class="price-switch">
+        <div>
+            Add Price Per Pizza
+        </div>
+        <label class="switch">
+            <input type="checkbox" checked id="priceSlider">
+            <div class="slider round"></div>
+        </label>
+
     </div>
+    <span id="error"></span>
     <div>
         <button id="submit" class="button invalid">Calculate Pizza Difference</button>
     </div>
