@@ -51,8 +51,6 @@ const isValid = () => {
     const arePricesValid = checkPizzaPriceValues();
     let isValid = false;
 
-    console.log(arePricesValid, arePricesValid);
-
     if (areSizesValid && arePricesValid) {
         isValid = true;
     }
