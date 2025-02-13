@@ -171,6 +171,7 @@ function calculatePercentageDifference() {
     }
 
     generatePizzaDiffText(smallPizza.size, largePizza.size, percentageDiff);
+    document.getElementById('scroll').scrollIntoView({ behavior: "smooth", block: "nearest" });
 };
 
 function checkAndSubmit() {
@@ -218,7 +219,7 @@ function generatePricePerInchText(smallPizza, largePizza, smallPizzaPPSI, largeP
             <div class="output-text">
                 The <span class='money'>$${smallPizza.price}</span> <span class='small'>${smallPizza.size}</span> inch pizza costs <span class='money'>$${smallPizzaPPSI}</span> per square inch.<br><br>
                 Meanwhile, the <span class='money'>$${largePizza.price}</span> <span class='large'>${largePizza.size}</span> inch pizza costs <span class='money'>$${largePizzaPPSI}</span> per square inch.<br><br>
-                Therefore, the <span class='${bestDealPizza.class}'>${bestDealPizza.size}</span> inch <span class='money'>$${bestDealPizza.price}</span> pizza at <span class='money'>$${bestDealPizza.PPSI}</span> per slice would be the best value per dollar.
+                Therefore, the <span class='${bestDealPizza.class}'>${bestDealPizza.size}</span> inch <span class='money'>$${bestDealPizza.price}</span> pizza at <span class='money'>$${bestDealPizza.PPSI}</span> per inch would be the best value per dollar.
             </div>
         </div>
     `;
