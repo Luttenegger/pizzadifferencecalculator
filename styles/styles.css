@@ -1,0 +1,285 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: beige;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 5rem;
+}
+.wrapper input {
+  border-radius: 5px;
+  border: 1px solid gray;
+  height: 10px;
+  padding: 10px;
+  margin: 5px;
+}
+.wrapper h1, .wrapper h2 {
+  color: #980202;
+}
+.wrapper h2 {
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgb(187, 187, 187);
+}
+.wrapper .title {
+  text-align: center;
+}
+.wrapper .table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 2rem 0;
+}
+.wrapper .table .table-row {
+  display: flex;
+  flex-direction: row;
+}
+.wrapper .table .table-row .table-head,
+.wrapper .table .table-row .table-data {
+  width: 100px;
+  padding: 6px;
+  border: 1px solid rgb(187, 187, 187);
+}
+.wrapper .table .table-row .table-head {
+  background: #980202;
+  color: white;
+}
+.wrapper .table .table-row .table-head:first-child {
+  border-radius: 5px 0 0 0;
+}
+.wrapper .table .table-row .table-head:last-child {
+  border-radius: 0 5px 0 0;
+}
+.wrapper .table .table-row .table-data {
+  text-align: center;
+}
+.wrapper .table .table-row .table-data.best-deal {
+  background-color: #04AA6D;
+  color: white;
+}
+.wrapper .table .table-row .table-data:first-child {
+  text-align: right;
+}
+.wrapper .table .table-row:last-child :first-child {
+  border-radius: 0 0 0 5px;
+}
+.wrapper .table .table-row:last-child :last-child {
+  border-radius: 0 0 5px 0;
+}
+.wrapper .button {
+  background-color: #04AA6D; /* Green */
+  border: none;
+  color: white;
+  background-color: #008CBA;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.wrapper .button.danger {
+  background-color: #ba0000;
+}
+.wrapper .button.danger:hover {
+  background-color: #980202;
+}
+.wrapper .button {
+  width: 270px;
+}
+.wrapper .button:hover {
+  background-color: #017095;
+}
+.wrapper .button.invalid {
+  background-color: rgb(220, 220, 220);
+  color: rgb(118, 117, 117);
+}
+.wrapper .button.invalid:hover {
+  cursor: not-allowed;
+}
+.wrapper .small, .wrapper .large, .wrapper .total, .wrapper .percent, .wrapper .money {
+  font-size: 1.4rem;
+}
+.wrapper .small {
+  color: purple;
+}
+.wrapper .large {
+  color: orange;
+}
+.wrapper .total {
+  color: red;
+}
+.wrapper .percent {
+  color: blue;
+}
+.wrapper .money {
+  color: green;
+}
+.wrapper #pizzaOutput {
+  padding-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.wrapper #pizzaOutput .pizza {
+  width: 100px;
+  height: 100px;
+  max-width: 100px;
+  max-height: 100px;
+  margin: 5px;
+  border-radius: 100%;
+  background-image: url("../pizza.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0;
+  animation: fadeIn ease 1000ms forwards;
+}
+.wrapper #output {
+  margin-bottom: 0;
+  margin-top: 2rem;
+  padding-bottom: 0;
+  max-width: 400px;
+  text-align: center;
+}
+.wrapper #output .output-wrap:not(:last-child) {
+  padding: 0;
+  margin-bottom: 2rem;
+}
+.wrapper #output .output-wrap .output-title {
+  padding: 0;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.wrapper .hide {
+  display: none !important;
+}
+.wrapper .show {
+  display: block;
+}
+.wrapper #error {
+  color: #ba0000;
+  font-size: 20px;
+  font-weight: bold;
+}
+.wrapper .input-wrap {
+  width: 100%;
+  max-width: 320px;
+  padding-bottom: 0;
+}
+.wrapper .input-wrap .inputs {
+  display: flex;
+  flex-direction: column;
+}
+.wrapper .input-wrap .inputs h2 {
+  padding-bottom: 6px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgb(187, 187, 187);
+  text-align: center;
+}
+.wrapper .input-wrap .inputs .input-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.wrapper .input-wrap .inputs .input-pizza,
+.wrapper .input-wrap .inputs .input-price,
+.wrapper .input-wrap .inputs .input-slices {
+  width: 70px;
+}
+@media only screen and (min-width: 768px) {
+  .wrapper .input-wrap {
+    max-width: 550px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .wrapper .input-wrap .inputs {
+    width: 100%;
+  }
+  .wrapper .input-wrap .inputs:first-child {
+    padding-right: 1rem;
+  }
+  .wrapper .input-wrap .inputs:last-child {
+    padding-left: 1rem;
+  }
+}
+.wrapper .toggle-options {
+  padding: 2rem 0;
+  width: 100%;
+  max-width: 320px;
+}
+.wrapper .toggle-options .price-switch {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  /* The switch - the box around the slider */
+}
+.wrapper .toggle-options .price-switch div {
+  padding: 8px 0;
+}
+.wrapper .toggle-options .price-switch .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  /* Hide default HTML checkbox */
+  /* The slider */
+  /* Rounded sliders */
+}
+.wrapper .toggle-options .price-switch .switch .switch input {
+  display: none;
+}
+.wrapper .toggle-options .price-switch .switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+.wrapper .toggle-options .price-switch .switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+.wrapper .toggle-options .price-switch .switch input:checked + .slider {
+  background-color: #008CBA;
+}
+.wrapper .toggle-options .price-switch .switch input:focus + .slider {
+  box-shadow: 0 0 1px #008CBA;
+}
+.wrapper .toggle-options .price-switch .switch input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+.wrapper .toggle-options .price-switch .switch .slider.round {
+  border-radius: 34px;
+}
+.wrapper .toggle-options .price-switch .switch .slider.round:before {
+  border-radius: 50%;
+}
+
+/*# sourceMappingURL=styles.css.map */

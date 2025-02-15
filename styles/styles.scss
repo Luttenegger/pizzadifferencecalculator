@@ -1,0 +1,346 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: beige;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 5rem;
+
+    input {
+        border-radius: 5px;
+        border: 1px solid gray;
+        height: 10px;
+        padding: 10px;
+        margin: 5px;
+    }
+
+    h1, h2 {
+        color:#980202;
+    }
+
+    h2 {
+        padding-bottom: 6px;
+        border-bottom: 1px solid rgb(187, 187, 187);
+    }
+
+    .title {
+        text-align: center;
+    }
+
+    .table {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: 2rem 0;
+
+        .table-row {
+            display: flex;
+            flex-direction: row;
+
+            .table-head,
+            .table-data {
+                width: 100px;
+                padding: 6px;
+                border: 1px solid rgb(187, 187, 187);
+            }
+
+            .table-head {
+                background: #980202;
+                color: white;
+
+                &:first-child {
+                    border-radius: 5px 0 0 0;
+                }
+
+                &:last-child {
+                    border-radius: 0 5px 0 0;
+                }
+            }
+
+            .table-data {
+                text-align: center;
+
+                &.best-deal {
+                    background-color: #04AA6D;
+                    color: white;
+                }
+
+                &:first-child {
+                    text-align: right;
+                }
+            }
+
+            &:last-child {
+                :first-child {
+                    border-radius: 0 0 0 5px;
+                }
+
+                :last-child {
+                    border-radius: 0 0 5px 0;
+                }
+            }
+        }
+    }
+
+    .button {
+        background-color: #04AA6D; /* Green */
+        border: none;
+        color: white;
+        background-color: #008CBA;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+
+        &.danger {
+            background-color: #ba0000;
+
+            &:hover {
+                background-color: #980202;
+            }
+        }
+    }
+
+    .button {
+        width: 270px;
+
+        &:hover {
+            background-color: #017095;
+        }
+
+        &.invalid {
+            background-color: rgb(220, 220, 220);
+            color: rgb(118, 117, 117);
+
+            &:hover {
+                cursor: not-allowed;
+            }
+        }
+    }
+    .small, .large, .total, .percent, .money {
+        font-size: 1.4rem;
+    }
+
+    .small {
+        color: purple;
+    }
+
+    .large {
+        color: orange;
+    }
+
+    .total {
+        color: red;
+    }
+
+    .percent {
+        color: blue;
+    }
+
+    .money {
+        color: green;
+    }
+
+    #pizzaOutput {
+        padding-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .pizza {
+            width: 100px;
+            height: 100px;
+            max-width: 100px;
+            max-height: 100px;
+            margin: 5px;
+            border-radius: 100%;
+            background-image: url("../pizza.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0;
+            animation: fadeIn ease 1000ms forwards;
+        }
+    }
+
+    #output {
+        margin-bottom: 0;
+        margin-top: 2rem;
+        padding-bottom: 0;
+        max-width: 400px;
+        text-align: center;
+
+        .output-wrap:not(:last-child) {
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+
+        .output-wrap .output-title {
+            padding: 0;
+        }
+    }
+
+    @keyframes fadeIn {
+        0% {
+        opacity: 0;
+        }
+
+        100% {
+        opacity: 1;
+        }
+    }
+
+    .hide {
+        display: none !important;
+    }
+
+    .show {
+        display: block;
+    }
+
+    #error {
+        color: #ba0000;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .input-wrap {
+        width: 100%;
+        max-width: 320px;
+        padding-bottom: 0;
+
+        .inputs {
+            display: flex;
+            flex-direction: column;
+
+            h2 {
+                padding-bottom: 6px;
+                margin-bottom: 6px;
+                border-bottom: 1px solid rgb(187, 187, 187);
+                text-align: center;
+            }
+
+            .input-row {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .input-pizza,
+            .input-price,
+            .input-slices {
+                width: 70px;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            max-width: 550px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            .inputs {
+                width: 100%;
+                 &:first-child {
+                    padding-right: 1rem;
+                 }
+
+                 &:last-child {
+                    padding-left: 1rem;
+                 }
+            }
+        }
+    }
+
+    .toggle-options {
+        padding: 2rem 0;
+        width: 100%;
+        max-width: 320px;
+
+        .price-switch {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 1rem;
+
+            div {
+                padding: 8px 0;
+            }
+
+            /* The switch - the box around the slider */
+
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 34px;
+                /* Hide default HTML checkbox */
+
+                .switch input {
+                    display: none;
+                }
+                /* The slider */
+
+                .slider {
+                    position: absolute;
+                    cursor: pointer;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: #ccc;
+                    -webkit-transition: .4s;
+                    transition: .4s;
+
+                    &:before {
+                        position: absolute;
+                        content: "";
+                        height: 26px;
+                        width: 26px;
+                        left: 4px;
+                        bottom: 4px;
+                        background-color: white;
+                        -webkit-transition: .4s;
+                        transition: .4s;
+                    }
+                }
+
+                input {
+                    &:checked + .slider {
+                        background-color: #008CBA;
+                    }
+
+                    &:focus + .slider {
+                        box-shadow: 0 0 1px #008CBA;
+                    }
+
+                    &:checked + .slider:before {
+                        -webkit-transform: translateX(26px);
+                        -ms-transform: translateX(26px);
+                        transform: translateX(26px);
+                    }
+                }
+                /* Rounded sliders */
+
+                .slider {
+                    &.round {
+                        border-radius: 34px;
+
+                        &:before {
+                            border-radius: 50%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

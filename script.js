@@ -12,6 +12,11 @@ const pizza2 = document.getElementById('pizza2');
 const pizza1Price = document.getElementById('pizza1Price');
 const pizza2Price = document.getElementById('pizza2Price');
 const priceSlider = document.getElementById('priceSlider');
+const pizza1Slices = document.getElementById('pizza1Slices');
+const pizza2Slices = document.getElementById('pizza2Slices');
+const sliceSlider = document.getElementById('sliceSlider');
+const outputTable = document.getElementById('outputTable');
+const resetter = document.querySelectorAll('.resetter');
 let totalPizzaDiff = 0;
 let delay = 0;
 
@@ -42,16 +47,18 @@ reset.addEventListener('click', function () {
 });
 
 priceSlider.addEventListener('change', showPriceInput);
+sliceSlider.addEventListener('change', showSlicesInput);
 
 //
 // Returns
 //
 const isValid = () => {
-    const areSizesValid = checkPizzaSizeValues();
-    const arePricesValid = checkPizzaPriceValues();
+    const areSizesValid = checkValues(pizza1.value, pizza2.value);
+    const arePricesValid = priceSlider.checked ? checkValues(pizza1Price.value, pizza2Price.value) : true;
+    const areSlicesValid = sliceSlider.checked ? checkValues(pizza1Slices.value, pizza2Slices.value): true;
     let isValid = false;
 
-    if (areSizesValid && arePricesValid) {
+    if (areSizesValid && arePricesValid && areSlicesValid) {
         isValid = true;
     }
 
@@ -69,11 +76,13 @@ const calculateCircleArea = ((diameter = 0) => {
 const smallerPizza = () => {
     const pizzaOne = {
         size: Number(pizza1.value),
-        price: Number(pizza1Price.value) || null
+        price: Number(pizza1Price.value) || null,
+        slices: Number(pizza1Slices.value) || null
     }
     const pizzaTwo = {
         size: Number(pizza2.value),
-        price: Number(pizza2Price.value) || null
+        price: Number(pizza2Price.value) || null,
+        slices: Number(pizza2Slices.value) || null
     }
 
     return pizzaOne.size < pizzaTwo.size ? pizzaOne : pizzaTwo || null;
@@ -82,67 +91,74 @@ const smallerPizza = () => {
 const largerPizza = () => {
     const pizzaOne = {
         size: Number(pizza1.value),
-        price: Number(pizza1Price.value) || null
+        price: Number(pizza1Price.value) || null,
+        slices: Number(pizza1Slices.value) || null
     }
     const pizzaTwo = {
         size: Number(pizza2.value),
-        price: Number(pizza2Price.value) || null
+        price: Number(pizza2Price.value) || null,
+        slices: Number(pizza2Slices.value) || null
     }
 
     return pizzaOne.size > pizzaTwo.size ? pizzaOne : pizzaTwo || null;
 }
 
-const calculateBestDeal = (smallPizza, largePizza, smallPizzaPPSI, largePizzaPPSI) => {
-    let bestDealPizza = null;
+// const calculateBestDeal = (smallPizza, largePizza, smallPizzaPPSI, largePizzaPPSI) => {
+//     let bestDealPizza = null;
 
-    if (smallPizzaPPSI > largePizzaPPSI) {
-        bestDealPizza = largePizza;
-        bestDealPizza.class = 'large';
-        bestDealPizza.PPSI = largePizzaPPSI;
-    } else {
-        bestDealPizza = smallPizza;
-        bestDealPizza.class = 'small';
-        bestDealPizza.PPSI = smallPizzaPPSI;
-    }
+//     if (smallPizzaPPSI > largePizzaPPSI) {
+//         bestDealPizza = largePizza;
+//         bestDealPizza.class = 'large';
+//         bestDealPizza.PPSI = largePizzaPPSI;
+//     } else {
+//         bestDealPizza = smallPizza;
+//         bestDealPizza.class = 'small';
+//         bestDealPizza.PPSI = smallPizzaPPSI;
+//     }
 
-    return bestDealPizza;
-}
+//     return bestDealPizza;
+// }
 
-const checkPizzaPriceValues = () => {
+const checkValues = (inputOne, inputTwo) => {
+    const firstVal = Number(inputOne) || null;
+    const secondVal = Number(inputTwo) || null;
     let isValid = false;
 
-    if (!priceSlider.checked) {
-        isValid = true;
-    } else {
-        const pizzaOnePrice = Number(pizza1Price.value) || null;
-        const pizzaTwoPrice = Number(pizza2Price.value) || null;
-
-        if (pizzaOnePrice && pizzaTwoPrice && pizzaOnePrice > 0 && pizzaTwoPrice > 0) {
-            isValid = true;
-
-            error.innerHTML = '';
-        } else if (pizzaOnePrice && pizzaTwoPrice && (pizzaOnePrice <= 0 || pizzaTwoPrice <= 0)) {
-            error.innerHTML = 'Cannot enter values less than 0.';
-        }
-    }
-
-    return isValid;
-}
-
-const checkPizzaSizeValues = () => {
-    const pizzaOneSize = Number(pizza1.value) || null;
-    const pizzaTwoSize = Number(pizza2.value) || null;
-    let isValid = false;
-
-    if (pizzaOneSize && pizzaTwoSize && pizzaOneSize > 0 && pizzaTwoSize > 0) {
+    if (firstVal && secondVal && firstVal > 0 && secondVal > 0) {
         isValid = true;
 
         error.innerHTML = '';
-    } else if (pizzaOneSize && pizzaTwoSize && (pizzaOneSize <= 0 || pizzaTwoSize <= 0)) {
+    } else if (firstVal && secondVal && (firstVal <= 0 || secondVal <= 0)) {
         error.innerHTML = 'Cannot enter values less than 0.';
     }
 
     return isValid;
+}
+
+const generatePPSIText = (smallPizza, largePizza, smallPizzaArea, largePizzaArea) => {
+    const smallPizzaPPSI = (smallPizza.price / smallPizzaArea).toFixed(2);
+    const largePizzaPPSI = (largePizza.price / largePizzaArea).toFixed(2);
+
+    return `
+        <div class='table-row'>
+            <div class='table-data'>Square Inch</div>
+            <div class="table-data ${smallPizzaPPSI < largePizzaPPSI ? 'best-deal' : ''}">$${smallPizzaPPSI}</div>
+            <div class="table-data ${largePizzaPPSI < smallPizzaPPSI ? 'best-deal' : ''}">$${largePizzaPPSI}</div>
+        </div>
+    `;
+}
+
+const generatePPSText = (smallPizza, largePizza) => {
+    const smallPizzaPPS = (smallPizza.price / smallPizza.slices).toFixed(2);
+    const largePizzaPPS = (largePizza.price / largePizza.slices).toFixed(2);
+
+    return `
+        <div class='table-row'>
+            <div class='table-data'>Slice</div>
+            <div class="table-data">$${smallPizzaPPS}</div>
+            <div class="table-data">$${largePizzaPPS}</div>
+        </div>
+    `;
 }
 
 //
@@ -163,16 +179,33 @@ function calculatePercentageDifference() {
         pizzaOutput.innerHTML = '';
     }
 
-    if (priceSlider.checked) {
-        const smallPizzaPPSI = (smallPizza.price / smallPizzaArea).toFixed(2);
-        const largePizzaPPSI = (largePizza.price / largePizzaArea).toFixed(2);
-        const bestDealPizza = calculateBestDeal(smallPizza, largePizza, smallPizzaPPSI, largePizzaPPSI);
-        generatePricePerInchText(smallPizza, largePizza, smallPizzaPPSI, largePizzaPPSI, bestDealPizza);
+    if (priceSlider.checked || sliceSlider.checked) {
+        generatePizzaTable(smallPizza, largePizza, smallPizzaArea, largePizzaArea);
     }
 
     generatePizzaDiffText(smallPizza.size, largePizza.size, percentageDiff);
-    document.getElementById('scroll').scrollIntoView({ behavior: "smooth", block: "nearest" });
+    output.scrollIntoView({ behavior: "smooth", block: "nearest" });
 };
+
+function generatePizzaTable(smallPizza, largePizza, smallPizzaArea, largePizzaArea) {
+    let PPSIHtml = priceSlider.checked ? generatePPSIText(smallPizza, largePizza, smallPizzaArea, largePizzaArea) : '';
+    let PPSHtml = sliceSlider.checked ? generatePPSText(smallPizza, largePizza) : '';
+
+    output.innerHTML += `
+        <div class="output-title">
+            <h2>Price Information</h2>
+        </div>
+        <div class='table'>
+            <div class='table-row'>
+                <div class='table-head'>Price Per</div>
+                <div class='table-head'>${smallPizza.size} Inch Pizza</div>
+                <div class='table-head'>${largePizza.size} Inch Pizza</div>
+            </div class='table-row'>
+            ${PPSIHtml}
+            ${PPSHtml}
+        </div>
+    `
+}
 
 function checkAndSubmit() {
     if (isValid()) {
@@ -210,21 +243,6 @@ function generatePizzaDiffText(smallSize, largeSize, percentageDiff) {
     `;
 }
 
-function generatePricePerInchText(smallPizza, largePizza, smallPizzaPPSI, largePizzaPPSI, bestDealPizza) {
-    output.innerHTML += `
-        <div class="output-wrap" id="pricePerInchOutput">
-            <div class="output-title">
-                <h2>Price Per Square Inch</h2>
-            </div>
-            <div class="output-text">
-                The <span class='money'>$${smallPizza.price}</span> <span class='small'>${smallPizza.size}</span> inch pizza costs <span class='money'>$${smallPizzaPPSI}</span> per square inch.<br><br>
-                Meanwhile, the <span class='money'>$${largePizza.price}</span> <span class='large'>${largePizza.size}</span> inch pizza costs <span class='money'>$${largePizzaPPSI}</span> per square inch.<br><br>
-                Therefore, the <span class='${bestDealPizza.class}'>${bestDealPizza.size}</span> inch <span class='money'>$${bestDealPizza.price}</span> pizza at <span class='money'>$${bestDealPizza.PPSI}</span> per inch would be the best value per dollar.
-            </div>
-        </div>
-    `;
-}
-
 function createLastPizzaDiv(lastPizzaDegrees) {
     if (lastPizzaDegrees !== 0) {
         delay += DELAYSPEED;
@@ -237,12 +255,11 @@ function createLastPizzaDiv(lastPizzaDegrees) {
 }
 
 function resetAll() {
+    resetter.forEach((element) => {
+        element.value = '';
+    })
     output.innerHTML = '';
     pizzaOutput.innerHTML = '';
-    pizza1.value = '';
-    pizza2.value = '';
-    pizza1Price.value = '';
-    pizza2Price.value = '';
     resetDiv.classList.add('hide');
     submit.classList.add('invalid');
     delay = 0;
@@ -253,21 +270,43 @@ function resetAll() {
 function showPriceInput() {
     const pricePerInchOutput = document.getElementById('pricePerInchOutput') || null;
 
-    if (priceSlider.checked) {
-        pizza1Price.classList.remove('hide');
-        pizza2Price.classList.remove('hide');
+    if (priceSlider.checked || sliceSlider.checked) {
+        pizza1Price.parentNode.classList.remove('hide');
+        pizza2Price.parentNode.classList.remove('hide');
 
         if (pricePerInchOutput) {
             pricePerInchOutput.classList.remove('hide');
         }
     } else {
-        pizza1Price.classList.add('hide');
-        pizza2Price.classList.add('hide');
+        pizza1Price.parentNode.classList.add('hide');
+        pizza2Price.parentNode.classList.add('hide');
 
         if (pricePerInchOutput) {
             pricePerInchOutput.classList.add('hide');
         }
     }
+}
+
+function showSlicesInput() {
+    const pricePerSliceOutput = document.getElementById('pricePerSliceOutput') || null;
+
+    if (sliceSlider.checked) {
+        pizza1Slices.parentNode.classList.remove('hide');
+        pizza2Slices.parentNode.classList.remove('hide');
+
+        if (pricePerSliceOutput) {
+            pricePerSliceOutput.classList.remove('hide');
+        }
+    } else {
+        pizza1Slices.parentNode.classList.add('hide');
+        pizza2Slices.parentNode.classList.add('hide');
+
+        if (pricePerSliceOutput) {
+            pricePerSliceOutput.classList.add('hide');
+        }
+    }
+
+    showPriceInput();
 }
 
 async function generatePizzas() {
