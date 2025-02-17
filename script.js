@@ -17,6 +17,8 @@ const pizza2Slices = document.getElementById('pizza2Slices');
 const sliceSlider = document.getElementById('sliceSlider');
 const outputTable = document.getElementById('outputTable');
 const resetter = document.querySelectorAll('.resetter');
+const themeToggle = document.getElementById('themeToggle');
+let isLightMode = true;
 let totalPizzaDiff = 0;
 let delay = 0;
 
@@ -45,6 +47,10 @@ submit.addEventListener('click', function () {
 reset.addEventListener('click', function () {
     resetAll();
 });
+
+themeToggle.addEventListener('click', function() {
+    toggleTheme();
+})
 
 priceSlider.addEventListener('change', showPriceInput);
 sliceSlider.addEventListener('change', showSlicesInput);
@@ -135,10 +141,7 @@ const checkValues = (inputOne, inputTwo) => {
     return isValid;
 }
 
-const generatePPSIText = (smallPizza, largePizza, smallPizzaArea, largePizzaArea) => {
-    const smallPizzaPPSI = (smallPizza.price / smallPizzaArea).toFixed(2);
-    const largePizzaPPSI = (largePizza.price / largePizzaArea).toFixed(2);
-
+const generatePPSIText = (smallPizzaPPSI, largePizzaPPSI) => {
     return `
         <div class='table-row'>
             <div class='table-data'>Square Inch</div>
@@ -188,21 +191,29 @@ function calculatePercentageDifference() {
 };
 
 function generatePizzaTable(smallPizza, largePizza, smallPizzaArea, largePizzaArea) {
-    let PPSIHtml = priceSlider.checked ? generatePPSIText(smallPizza, largePizza, smallPizzaArea, largePizzaArea) : '';
+    const smallPizzaPPSI = (smallPizza.price / smallPizzaArea).toFixed(2);
+    const largePizzaPPSI = (largePizza.price / largePizzaArea).toFixed(2);
+    let PPSIHtml = priceSlider.checked ? generatePPSIText(smallPizzaPPSI, largePizzaPPSI) : '';
     let PPSHtml = sliceSlider.checked ? generatePPSText(smallPizza, largePizza) : '';
 
     output.innerHTML += `
-        <div class="output-title">
-            <h2>Price Information</h2>
-        </div>
-        <div class='table'>
-            <div class='table-row'>
-                <div class='table-head'>Price Per</div>
-                <div class='table-head'>${smallPizza.size} Inch Pizza</div>
-                <div class='table-head'>${largePizza.size} Inch Pizza</div>
-            </div class='table-row'>
-            ${PPSIHtml}
-            ${PPSHtml}
+        <div class='output-wrap'>
+            <div class="output-title">
+                <h2>Price Information</h2>
+            </div>
+            <div class='table'>
+                <div class='table-row'>
+                    <div class='table-head'>Price Per</div>
+                    <div class='table-head'>${smallPizza.size} Inch Pizza</div>
+                    <div class='table-head'>${largePizza.size} Inch Pizza</div>
+                </div class='table-row'>
+                ${PPSIHtml}
+                ${PPSHtml}
+            </div>
+            <div class='table-key'>
+                <div class='green-key'></div>
+                <div>Best value per dollar</div>
+            </div>
         </div>
     `
 }
@@ -244,9 +255,11 @@ function generatePizzaDiffText(smallSize, largeSize, percentageDiff) {
 }
 
 function createLastPizzaDiv(lastPizzaDegrees) {
+    const bgColor = isLightMode ? `rgb(40, 40, 40)` : 'beige';
+
     if (lastPizzaDegrees !== 0) {
         delay += DELAYSPEED;
-        const lastPizzaStyle = `background-image: conic-gradient(rgba(255, 255, 255, 0) ${lastPizzaDegrees}deg, beige ${lastPizzaDegrees}deg), url('pizza.png');`;
+        const lastPizzaStyle = `background-image: conic-gradient(rgba(255, 255, 255, 0) ${lastPizzaDegrees}deg, ${bgColor} ${lastPizzaDegrees}deg), url('pizza.png');`;
 
             pizzaOutput.innerHTML += `
             <div class="pizza" style="${lastPizzaStyle} animation-delay: ${delay}ms"></div>
@@ -319,3 +332,30 @@ async function generatePizzas() {
 
     delay = 0;
 }
+
+function toggleTheme() {
+    isLightMode = themeToggle.checked;
+
+    if (isLightMode) {
+        localStorage.removeItem('darkMode');
+        document.body.classList.remove('dark-mode');
+    } else {
+        localStorage.setItem('darkMode', 'true');
+        document.body.classList.add('dark-mode');
+    }
+}
+
+function checkTheme() {
+    console.log(localStorage.getItem('darkMode'));
+
+    if (localStorage.getItem('darkMode')) {
+        isLightMode = false;
+        themeToggle.checked = false;
+        document.body.classList.add('dark-mode');
+    } else {
+        themeToggle.checked = true;
+        document.body.classList.remove('dark-mode');
+    }
+}
+
+checkTheme();

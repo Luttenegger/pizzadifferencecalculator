@@ -1,6 +1,25 @@
+$background-color: beige;
+$border-color: gray;
+$primary-color: #ba0000;
+$secondary-color-dark: #9e0101;
+$light-green: #04AA6D;
+$text-color: black;
+$white: white;
+
+// Buttons
+$primary-button-color: #008CBA;
+$reset-button-color: $primary-color;
+
+// Output colors
+$small: purple;
+$large: orange;
+$total: red;
+$percent: blue;
+$money: green;
+
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: beige;
+    background-color: $background-color;
 }
 
 .wrapper {
@@ -8,90 +27,38 @@ body {
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    padding-top: 5rem;
+    padding-top: 3rem;
+
+    .pizza-banner {
+        img {
+            width: 100px;
+        }
+    }
 
     input {
         border-radius: 5px;
-        border: 1px solid gray;
+        border: 1px solid $border-color;
         height: 10px;
         padding: 10px;
         margin: 5px;
     }
 
     h1, h2 {
-        color:#980202;
+        color: $primary-color;
     }
 
     h2 {
         padding-bottom: 6px;
-        border-bottom: 1px solid rgb(187, 187, 187);
+        border-bottom: 1px solid $border-color;
     }
 
     .title {
         text-align: center;
     }
-
-    .table {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        margin: 2rem 0;
-
-        .table-row {
-            display: flex;
-            flex-direction: row;
-
-            .table-head,
-            .table-data {
-                width: 100px;
-                padding: 6px;
-                border: 1px solid rgb(187, 187, 187);
-            }
-
-            .table-head {
-                background: #980202;
-                color: white;
-
-                &:first-child {
-                    border-radius: 5px 0 0 0;
-                }
-
-                &:last-child {
-                    border-radius: 0 5px 0 0;
-                }
-            }
-
-            .table-data {
-                text-align: center;
-
-                &.best-deal {
-                    background-color: #04AA6D;
-                    color: white;
-                }
-
-                &:first-child {
-                    text-align: right;
-                }
-            }
-
-            &:last-child {
-                :first-child {
-                    border-radius: 0 0 0 5px;
-                }
-
-                :last-child {
-                    border-radius: 0 0 5px 0;
-                }
-            }
-        }
-    }
-
     .button {
-        background-color: #04AA6D; /* Green */
         border: none;
-        color: white;
-        background-color: #008CBA;
+        color: $white;
+        background-color: $primary-button-color;
         padding: 15px 32px;
         text-align: center;
         text-decoration: none;
@@ -102,10 +69,10 @@ body {
         border-radius: 5px;
 
         &.danger {
-            background-color: #ba0000;
+            background-color: $reset-button-color;
 
             &:hover {
-                background-color: #980202;
+                background-color: $secondary-color-dark;
             }
         }
     }
@@ -131,23 +98,119 @@ body {
     }
 
     .small {
-        color: purple;
+        color: $small;
     }
 
     .large {
-        color: orange;
+        color: $large;
     }
 
     .total {
-        color: red;
+        color: $total;
     }
 
     .percent {
-        color: blue;
+        color: $percent;
     }
 
     .money {
-        color: green;
+        color: $money;
+    }
+
+    .output-wrap {
+        background: $white;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 5px;
+        border: 1px solid $border-color;
+
+        .output-title {
+            padding: 0;
+            margin-top: 0;
+
+            h2 {
+                margin-top: 0;
+            }
+        }
+
+        .table {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+
+            .table-row {
+                display: flex;
+                flex-direction: row;
+                border-bottom: 1px solid $border-color;
+                border-left: 1px solid $border-color;
+                border-right: 1px solid $border-color;
+
+                &:first-child {
+                    border-top: 1px solid $border-color;
+                    border-radius: 5px 5px 0 0;
+                }
+
+                &:last-child {
+                    border-radius: 0 0 5px 5px;
+                }
+
+                .table-head,
+                .table-data {
+                    width: 100px;
+                    padding: 6px;
+
+                    &:not(:last-child) {
+                        border-right: 1px solid $border-color;
+                    }
+
+                }
+
+                .table-head {
+                    background: $secondary-color-dark;
+                    color: $white;
+
+                    &:first-child {
+                        border-radius: 5px 0 0 0;
+                    }
+
+                    &:last-child {
+                        border-radius: 0 5px 0 0;
+                    }
+                }
+
+                .table-data {
+                    text-align: center;
+
+                    &.best-deal {
+                        background-color: $light-green;
+                        color: $white;
+                    }
+
+                    &:first-child {
+                        text-align: right;
+                    }
+                }
+            }
+        }
+
+        .table-key {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding-top: 6px;
+
+            .green-key {
+                background-color: $light-green;
+                width: 10px;
+                height: 10px;
+                border-radius: 100px;
+                border: 1px solid black;
+                margin-right: 5px;
+            }
+        }
+
     }
 
     #pizzaOutput {
@@ -168,6 +231,7 @@ body {
             background-repeat: no-repeat;
             opacity: 0;
             animation: fadeIn ease 1000ms forwards;
+            background-color: red !important;
         }
     }
 
@@ -177,15 +241,6 @@ body {
         padding-bottom: 0;
         max-width: 400px;
         text-align: center;
-
-        .output-wrap:not(:last-child) {
-            padding: 0;
-            margin-bottom: 2rem;
-        }
-
-        .output-wrap .output-title {
-            padding: 0;
-        }
     }
 
     @keyframes fadeIn {
@@ -224,7 +279,7 @@ body {
             h2 {
                 padding-bottom: 6px;
                 margin-bottom: 6px;
-                border-bottom: 1px solid rgb(187, 187, 187);
+                border-bottom: 1px solid $border-color;
                 text-align: center;
             }
 
@@ -307,7 +362,7 @@ body {
                         width: 26px;
                         left: 4px;
                         bottom: 4px;
-                        background-color: white;
+                        background-color: $white;
                         -webkit-transition: .4s;
                         transition: .4s;
                     }
@@ -315,11 +370,11 @@ body {
 
                 input {
                     &:checked + .slider {
-                        background-color: #008CBA;
+                        background-color: $primary-button-color;
                     }
 
                     &:focus + .slider {
-                        box-shadow: 0 0 1px #008CBA;
+                        box-shadow: 0 0 1px $primary-button-color;
                     }
 
                     &:checked + .slider:before {
@@ -344,3 +399,113 @@ body {
     }
 }
 
+// Dark Mode
+$DM-background-color: rgb(40, 40, 40);
+$DM-body-text: rgb(223, 223, 223);
+$DM-table-background: rgb(20 20 20);
+$DM-percent: rgb(18 186 255);
+$DM-small: #ff2eff;
+$DM-border-color: $white;
+
+.dark-mode {
+    background: $DM-background-color;
+    color: $DM-body-text;
+
+    .wrapper {
+        h1 {
+            text-shadow: 0 0 2px $white;
+        }
+
+        h2 {
+            text-shadow: 0 0 1px $white;
+        }
+
+        .output-wrap {
+            background-color: $DM-table-background;
+        }
+
+        .percent {
+            color: $DM-percent;
+        }
+
+        .small {
+            color: $DM-small;
+        }
+
+        .output-wrap {
+            .table-key {
+                .green-key {
+                    border: 1px solid $white;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+.toggle {
+    display: flex;
+    justify-content: right;
+    position: relative;
+    box-sizing: border-box;
+  }
+  .toggle input[type="checkbox"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
+  }
+  .toggle label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  // moon
+  .toggle label:before {
+    content: '';
+    width: 51px;
+    height: 24px;
+    position: relative;
+    display: inline-block;
+    border-radius: 20px;
+    box-sizing: border-box;
+    transition: 0.25s ease-in;
+    background: #fff;
+    border: 2px solid #DDD;
+    box-shadow: inset -27px 0 0 #666;
+  }
+
+  .toggle label:after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    left: 4px;
+    top: 5px;
+    border-radius: 50%;
+    background: #FFF;
+    box-shadow: inset -8px -5px #333;
+    transition: 0.2s ease-in-out;
+  }
+
+  // Sun
+  .toggle input[type="checkbox"]:checked + label:before {
+    box-shadow: inset 25px 0 0 $white;
+  }
+  .toggle input[type="checkbox"]:checked + label:after {
+    left: 30px;
+    top: 4px;
+    box-shadow: inset 0 0 0 2px #FFF;
+    background: #ffbc00;
+    border: 1px dashed #FFF;
+  }
