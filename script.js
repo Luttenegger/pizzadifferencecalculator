@@ -30,6 +30,7 @@ inputs.forEach((input) => {
     input.addEventListener('keyup', function (e) {
         if (e.key === 'Enter') {
             checkAndSubmit();
+            scrollToResult();
         }
 
         if (isValid()) {
@@ -42,6 +43,7 @@ inputs.forEach((input) => {
 
 submit.addEventListener('click', function () {
     checkAndSubmit();
+    scrollToResult();
 });
 
 reset.addEventListener('click', function () {
@@ -187,7 +189,6 @@ function calculatePercentageDifference() {
     }
 
     generatePizzaDiffText(smallPizza.size, largePizza.size, percentageDiff);
-    output.scrollIntoView({ behavior: "smooth", block: "nearest" });
 };
 
 function generatePizzaTable(smallPizza, largePizza, smallPizzaArea, largePizzaArea) {
@@ -255,7 +256,7 @@ function generatePizzaDiffText(smallSize, largeSize, percentageDiff) {
 }
 
 function createLastPizzaDiv(lastPizzaDegrees) {
-    const bgColor = isLightMode ? `rgb(40, 40, 40)` : 'beige';
+    const bgColor = isLightMode ? 'beige' : `rgb(40, 40, 40)`;
 
     if (lastPizzaDegrees !== 0) {
         delay += DELAYSPEED;
@@ -333,6 +334,10 @@ async function generatePizzas() {
     delay = 0;
 }
 
+function scrollToResult() {
+    output.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
 function toggleTheme() {
     isLightMode = themeToggle.checked;
 
@@ -343,11 +348,11 @@ function toggleTheme() {
         localStorage.setItem('darkMode', 'true');
         document.body.classList.add('dark-mode');
     }
+
+    checkAndSubmit();
 }
 
 function checkTheme() {
-    console.log(localStorage.getItem('darkMode'));
-
     if (localStorage.getItem('darkMode')) {
         isLightMode = false;
         themeToggle.checked = false;
