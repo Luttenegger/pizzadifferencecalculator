@@ -29,8 +29,8 @@ let delay = 0;
 inputs.forEach((input) => {
     input.addEventListener('keyup', function (e) {
         if (e.key === 'Enter') {
+            e.preventDefault();
             checkAndSubmit();
-            scrollToResult();
         }
 
         if (isValid()) {
@@ -41,9 +41,9 @@ inputs.forEach((input) => {
     })
 });
 
-submit.addEventListener('click', function () {
+submit.addEventListener('click', function (e) {
+    e.preventDefault();
     checkAndSubmit();
-    scrollToResult();
 });
 
 reset.addEventListener('click', function () {
