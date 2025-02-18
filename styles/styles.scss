@@ -422,14 +422,6 @@ $DM-border-color: $white;
     color: $DM-body-text;
 
     .wrapper {
-        h1 {
-            text-shadow: 0 0 2px $white;
-        }
-
-        h2 {
-            text-shadow: 0 0 1px $white;
-        }
-
         .output-wrap {
             animation: fadeIn ease 1000ms forwards;
             background-color: $DM-table-background;
