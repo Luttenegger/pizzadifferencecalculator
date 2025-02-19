@@ -1,6 +1,6 @@
-$background-color: beige;
+$background-color: #f1f1f1;
 $border-color: gray;
-$primary-color: #ba0000;
+$primary-color: red;
 $secondary-color-dark: #9e0101;
 $light-green: #04AA6D;
 $text-color: black;
@@ -8,7 +8,7 @@ $white: white;
 
 // Buttons
 $primary-button-color: #008CBA;
-$reset-button-color: $primary-color;
+$reset-button-color: rgb(206, 5, 5);
 
 // Output colors
 $small: purple;
@@ -17,23 +17,60 @@ $total: red;
 $percent: blue;
 $money: green;
 
+//header
+$header-main-color: red;
+
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: $background-color;
-}
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 
+    h1,
+    h2 {
+        // font-family: "Sigmar", serif;
+        font-family: "Knewave", serif;
+        text-shadow: 1px 1px 1px #333;
+    }
+
+    h2 {
+        padding-bottom: 6px;
+        color: $primary-color;
+        border-bottom: 1px solid $border-color;
+    }
+
+    header {
+        text-align: center;
+        background-size: cover;
+        background-attachment: fixed;
+        position: relative;
+        overflow: hidden;
+        border-radius: 0 0 85% 85% / 30%;
+
+        .pizza-banner {
+            img {
+                width: 100px;
+            }
+        }
+
+        .overlay {
+            padding: 50px;
+            color: $white;
+            text-shadow: 1px 1px 1px #333;
+            background-image: linear-gradient(135deg, rgb(213, 0, 0) 30%, #ffe100 100%);
+        }
+    }
+
+}
 .wrapper {
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
     padding-top: 3rem;
-
-    .pizza-banner {
-        img {
-            width: 100px;
-        }
-    }
+    margin: 0 1rem 3rem 1rem;
 
     input {
         border-radius: 5px;
@@ -41,16 +78,6 @@ body {
         height: 10px;
         padding: 10px;
         margin: 5px;
-    }
-
-    h1,
-    h2 {
-        color: $primary-color;
-    }
-
-    h2 {
-        padding-bottom: 6px;
-        border-bottom: 1px solid $border-color;
     }
 
     .title {
@@ -85,6 +112,7 @@ body {
                     align-items: center;
                     justify-content: space-between;
                     animation: fadeIn ease 1000ms forwards;
+                    transition: opacity 1s ease-in-out;
                 }
 
                 .input-pizza,
@@ -149,6 +177,7 @@ body {
                         background-color: #ccc;
                         -webkit-transition: .4s;
                         transition: .4s;
+                        // border: 2px solid white;
 
                         &:before {
                             position: absolute;
@@ -192,7 +221,8 @@ body {
             }
         }
 
-        input[type="button"], input[type="submit"] {
+        input[type="button"],
+        input[type="submit"] {
             width: 270px;
             border: none;
             color: $white;
@@ -266,7 +296,7 @@ body {
 
     .output-wrap {
         background: $white;
-        margin: 1rem;
+        margin-bottom: 1rem;
         padding: 1rem;
         border-radius: 5px;
         border: 1px solid $border-color;
@@ -314,7 +344,7 @@ body {
                 }
 
                 .table-head {
-                    background: $secondary-color-dark;
+                    background: $reset-button-color;
                     color: $white;
 
                     &:first-child {
@@ -386,7 +416,6 @@ body {
         margin-bottom: 0;
         margin-top: 2rem;
         padding-bottom: 0;
-        max-width: 400px;
         text-align: center;
     }
 }
@@ -401,12 +430,18 @@ body {
     }
 }
 
-.hide {
-    display: none !important;
+@keyframes fadeOut {
+    100% {
+        opacity: 1;
+    }
+
+    0% {
+        opacity: 0;
+    }
 }
 
-.show {
-    display: block;
+.hide {
+    display: none !important;
 }
 
 // Dark Mode
@@ -421,10 +456,37 @@ $DM-border-color: $white;
     background: $DM-background-color;
     color: $DM-body-text;
 
+    header {
+        .overlay {
+            background-image: linear-gradient(135deg, rgb(82, 0, 0) 30%, #9c8a00 100%);
+        }
+    }
+
     .wrapper {
+        .form {
+            .input-wrap {
+                .inputs {
+                    h2 {
+                        border-bottom: 1px solid $white;
+                        text-shadow: 1px 1px 1px $white;
+                    }
+                }
+            }
+
+            .toggle-options {
+                .price-switch {
+                    .switch {
+                        .slider {
+                            background-color: #757575;
+                        }
+                    }
+                }
+            }
+        }
         .output-wrap {
             animation: fadeIn ease 1000ms forwards;
             background-color: $DM-table-background;
+            transition: opacity 1s ease-in-out;
 
             .table-key {
                 .green-key {
@@ -477,8 +539,8 @@ $DM-border-color: $white;
         border-radius: 20px;
         box-sizing: border-box;
         transition: 0.25s ease-in;
-        background: #fff;
-        border: 2px solid #DDD;
+        background: $white;
+        border: 2px solid #919191;
         box-shadow: inset -27px 0 0 #666;
     }
 
@@ -490,7 +552,7 @@ $DM-border-color: $white;
         left: 4px;
         top: 5px;
         border-radius: 50%;
-        background: #FFF;
+        background: $white;
         box-shadow: inset -8px -5px #333;
         transition: 0.2s ease-in-out;
     }
@@ -503,8 +565,8 @@ $DM-border-color: $white;
     input[type="checkbox"]:checked+label:after {
         left: 30px;
         top: 4px;
-        box-shadow: inset 0 0 0 2px #FFF;
+        box-shadow: inset 0 0 0 2px $white;
         background: #ffbc00;
-        border: 1px dashed #FFF;
+        border: 1px dashed black;
     }
 }

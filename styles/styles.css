@@ -1,6 +1,36 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-color: beige;
+  background-color: #f1f1f1;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body h1,
+body h2 {
+  font-family: "Knewave", serif;
+  text-shadow: 1px 1px 1px #333;
+}
+body h2 {
+  padding-bottom: 6px;
+  color: red;
+  border-bottom: 1px solid gray;
+}
+body header {
+  text-align: center;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 85% 85%/30%;
+}
+body header .pizza-banner img {
+  width: 100px;
+}
+body header .overlay {
+  padding: 50px;
+  color: white;
+  text-shadow: 1px 1px 1px #333;
+  background-image: linear-gradient(135deg, rgb(213, 0, 0) 30%, #ffe100 100%);
 }
 
 .wrapper {
@@ -9,9 +39,7 @@ body {
   flex-direction: column;
   justify-content: center;
   padding-top: 3rem;
-}
-.wrapper .pizza-banner img {
-  width: 100px;
+  margin: 0 1rem 3rem 1rem;
 }
 .wrapper input {
   border-radius: 5px;
@@ -19,14 +47,6 @@ body {
   height: 10px;
   padding: 10px;
   margin: 5px;
-}
-.wrapper h1,
-.wrapper h2 {
-  color: #ba0000;
-}
-.wrapper h2 {
-  padding-bottom: 6px;
-  border-bottom: 1px solid gray;
 }
 .wrapper .title {
   text-align: center;
@@ -58,6 +78,7 @@ body {
   align-items: center;
   justify-content: space-between;
   animation: fadeIn ease 1000ms forwards;
+  transition: opacity 1s ease-in-out;
 }
 .wrapper .form .input-wrap .inputs .input-pizza,
 .wrapper .form .input-wrap .inputs .input-price,
@@ -142,7 +163,8 @@ body {
 .wrapper .form .toggle-options .price-switch .switch .slider.round:before {
   border-radius: 50%;
 }
-.wrapper .form input[type=button], .wrapper .form input[type=submit] {
+.wrapper .form input[type=button],
+.wrapper .form input[type=submit] {
   width: 270px;
   border: none;
   color: white;
@@ -157,20 +179,25 @@ body {
   border-radius: 5px;
   height: 50px;
 }
-.wrapper .form input[type=button]:hover, .wrapper .form input[type=submit]:hover {
+.wrapper .form input[type=button]:hover,
+.wrapper .form input[type=submit]:hover {
   background-color: #017095;
 }
-.wrapper .form input[type=button].invalid, .wrapper .form input[type=submit].invalid {
+.wrapper .form input[type=button].invalid,
+.wrapper .form input[type=submit].invalid {
   background-color: rgb(220, 220, 220);
   color: rgb(118, 117, 117);
 }
-.wrapper .form input[type=button].invalid:hover, .wrapper .form input[type=submit].invalid:hover {
+.wrapper .form input[type=button].invalid:hover,
+.wrapper .form input[type=submit].invalid:hover {
   cursor: not-allowed;
 }
-.wrapper .form input[type=button].danger, .wrapper .form input[type=submit].danger {
-  background-color: #ba0000;
+.wrapper .form input[type=button].danger,
+.wrapper .form input[type=submit].danger {
+  background-color: rgb(206, 5, 5);
 }
-.wrapper .form input[type=button].danger:hover, .wrapper .form input[type=submit].danger:hover {
+.wrapper .form input[type=button].danger:hover,
+.wrapper .form input[type=submit].danger:hover {
   background-color: #9e0101;
 }
 .wrapper .small,
@@ -202,7 +229,7 @@ body {
 }
 .wrapper .output-wrap {
   background: white;
-  margin: 1rem;
+  margin-bottom: 1rem;
   padding: 1rem;
   border-radius: 5px;
   border: 1px solid gray;
@@ -244,7 +271,7 @@ body {
   border-right: 1px solid gray;
 }
 .wrapper .output-wrap .table .table-row .table-head {
-  background: #9e0101;
+  background: rgb(206, 5, 5);
   color: white;
 }
 .wrapper .output-wrap .table .table-row .table-head:first-child {
@@ -302,7 +329,6 @@ body {
   margin-bottom: 0;
   margin-top: 2rem;
   padding-bottom: 0;
-  max-width: 400px;
   text-align: center;
 }
 
@@ -314,21 +340,36 @@ body {
     opacity: 1;
   }
 }
+@keyframes fadeOut {
+  100% {
+    opacity: 1;
+  }
+  0% {
+    opacity: 0;
+  }
+}
 .hide {
   display: none !important;
-}
-
-.show {
-  display: block;
 }
 
 .dark-mode {
   background: rgb(40, 40, 40);
   color: rgb(223, 223, 223);
 }
+.dark-mode header .overlay {
+  background-image: linear-gradient(135deg, rgb(82, 0, 0) 30%, #9c8a00 100%);
+}
+.dark-mode .wrapper .form .input-wrap .inputs h2 {
+  border-bottom: 1px solid white;
+  text-shadow: 1px 1px 1px white;
+}
+.dark-mode .wrapper .form .toggle-options .price-switch .switch .slider {
+  background-color: #757575;
+}
 .dark-mode .wrapper .output-wrap {
   animation: fadeIn ease 1000ms forwards;
   background-color: rgb(20, 20, 20);
+  transition: opacity 1s ease-in-out;
 }
 .dark-mode .wrapper .output-wrap .table-key .green-key {
   border: 1px solid white;
@@ -370,8 +411,8 @@ body {
   border-radius: 20px;
   box-sizing: border-box;
   transition: 0.25s ease-in;
-  background: #fff;
-  border: 2px solid #DDD;
+  background: white;
+  border: 2px solid #919191;
   box-shadow: inset -27px 0 0 #666;
 }
 .toggle label:after {
@@ -382,7 +423,7 @@ body {
   left: 4px;
   top: 5px;
   border-radius: 50%;
-  background: #FFF;
+  background: white;
   box-shadow: inset -8px -5px #333;
   transition: 0.2s ease-in-out;
 }
@@ -392,9 +433,9 @@ body {
 .toggle input[type=checkbox]:checked + label:after {
   left: 30px;
   top: 4px;
-  box-shadow: inset 0 0 0 2px #FFF;
+  box-shadow: inset 0 0 0 2px white;
   background: #ffbc00;
-  border: 1px dashed #FFF;
+  border: 1px dashed black;
 }
 
 /*# sourceMappingURL=styles.css.map */

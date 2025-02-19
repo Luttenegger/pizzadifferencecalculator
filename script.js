@@ -258,14 +258,18 @@ function generatePizzaDiffText(smallSize, largeSize, percentageDiff) {
 }
 
 function createLastPizzaDiv(lastPizzaDegrees) {
-    const bgColor = isLightMode ? 'beige' : `rgb(40, 40, 40)`;
+    const bgColor = isLightMode ? '#f1f1f1' : `rgb(40, 40, 40)`;
+    delay += DELAYSPEED;
 
     if (lastPizzaDegrees !== 0) {
-        delay += DELAYSPEED;
         const lastPizzaStyle = `background-image: conic-gradient(rgba(255, 255, 255, 0) ${lastPizzaDegrees}deg, ${bgColor} ${lastPizzaDegrees}deg), url('pizza.png');`;
 
             pizzaOutput.innerHTML += `
             <div class="pizza" style="${lastPizzaStyle} animation-delay: ${delay}ms"></div>
+        `;
+    } else {
+        pizzaOutput.innerHTML += `
+            <div class='pizza' style="animation-delay: ${delay}ms"></div>
         `;
     }
 }
