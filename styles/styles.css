@@ -9,7 +9,7 @@ body {
 body h1,
 body h2 {
   font-family: "Knewave", serif;
-  text-shadow: 1px 1px 1px #333;
+  text-shadow: 1px 1px 1px red;
 }
 body h2 {
   padding-bottom: 6px;
@@ -78,8 +78,8 @@ body header .overlay {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  animation: fadeIn ease 1000ms forwards;
-  transition: all 1s ease-in-out;
+  animation: fadeIn ease 300ms forwards;
+  transition: all 0.3s ease-in-out;
 }
 .wrapper .form .input-wrap .inputs .input-pizza,
 .wrapper .form .input-wrap .inputs .input-price,
@@ -251,6 +251,7 @@ body header .overlay {
 .wrapper .output-wrap .table .table-row {
   display: flex;
   flex-direction: row;
+  width: 100%;
   border-bottom: 1px solid gray;
   border-left: 1px solid gray;
   border-right: 1px solid gray;
@@ -264,7 +265,8 @@ body header .overlay {
 }
 .wrapper .output-wrap .table .table-row .table-head,
 .wrapper .output-wrap .table .table-row .table-data {
-  width: 100px;
+  min-width: 100px;
+  width: 100%;
   padding: 6px;
 }
 .wrapper .output-wrap .table .table-row .table-head:not(:last-child),
@@ -287,9 +289,6 @@ body header .overlay {
 .wrapper .output-wrap .table .table-row .table-data.best-deal {
   background-color: #04AA6D;
   color: white;
-}
-.wrapper .output-wrap .table .table-row .table-data:first-child {
-  text-align: right;
 }
 .wrapper .output-wrap .table-key {
   display: flex;
@@ -359,7 +358,7 @@ body header .overlay {
   transition: background-color 0.3s ease-in-out;
 }
 .dark-mode header .overlay {
-  background: linear-gradient(135deg, rgb(82, 0, 0) 30%, #9c8a00 100%);
+  background: linear-gradient(135deg, rgb(0, 0, 0) 30%, #ff0202 100%);
 }
 .dark-mode .wrapper .form .input-wrap .inputs h2 {
   border-bottom: 1px solid white;
@@ -368,9 +367,13 @@ body header .overlay {
 .dark-mode .wrapper .form .toggle-options .price-switch .switch .slider {
   background-color: #757575;
 }
+.dark-mode .wrapper .form input[type=submit].invalid {
+  background-color: rgb(117, 117, 117);
+  color: rgb(203, 203, 203);
+}
 .dark-mode .wrapper .output-wrap {
-  animation: fadeIn ease 1000ms forwards;
-  background-color: rgb(20, 20, 20);
+  animation: fadeIn ease 300ms forwards;
+  background-color: rgb(30, 30, 30);
   transition: opacity 1s ease-in-out;
 }
 .dark-mode .wrapper .output-wrap .table-key .green-key {
@@ -387,6 +390,7 @@ body header .overlay {
   position: absolute;
   top: 1rem;
   right: 1rem;
+  transition: all 0.3s ease-in-out;
 }
 .toggle input[type=checkbox] {
   position: absolute;

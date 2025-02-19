@@ -198,6 +198,12 @@ function generatePizzaTable(smallPizza, largePizza, smallPizzaArea, largePizzaAr
     const largePizzaPPSI = (largePizza.price / largePizzaArea).toFixed(2);
     let PPSIHtml = priceSlider.checked ? generatePPSIText(smallPizzaPPSI, largePizzaPPSI) : '';
     let PPSHtml = sliceSlider.checked ? generatePPSText(smallPizza, largePizza) : '';
+    const tableKey = `
+            <div class='table-key'>
+                <div class='green-key'></div>
+                <div>Best value per dollar</div>
+            </div>`;
+    const tableKeyHtml = priceSlider.checked ? tableKey : '';
 
     output.innerHTML += `
         <div class='output-wrap'>
@@ -213,10 +219,7 @@ function generatePizzaTable(smallPizza, largePizza, smallPizzaArea, largePizzaAr
                 ${PPSIHtml}
                 ${PPSHtml}
             </div>
-            <div class='table-key'>
-                <div class='green-key'></div>
-                <div>Best value per dollar</div>
-            </div>
+            ${tableKeyHtml}
         </div>
     `
 }
