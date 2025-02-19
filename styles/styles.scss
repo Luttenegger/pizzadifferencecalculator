@@ -462,17 +462,13 @@ $DM-border-color: $white;
         }
     }
 
+    h2 {
+        border-bottom: 1px solid $white;
+        text-shadow: 1px 1px 1px $white;
+    }
+
     .wrapper {
         .form {
-            .input-wrap {
-                .inputs {
-                    h2 {
-                        border-bottom: 1px solid $white;
-                        text-shadow: 1px 1px 1px $white;
-                    }
-                }
-            }
-
             .toggle-options {
                 .price-switch {
                     .switch {
